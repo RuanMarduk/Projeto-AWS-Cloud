@@ -135,58 +135,68 @@ Este script:
 
    - Copie o URL do WebHook
 
-
-#### Exemplo de funcionamento:
+- Além disso, é necessário mudar o fuso horário da sua EC2, execute o seguite comando:
 
 ```bash
-#!/bin/bash
+sudo timedatectl set-timezone America/Sao_Paulo
+```
 
-SITE="http://localhost"
-LOG="/var/log/monitoramento.log"
-STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$SITE")
-DATA=$(date '+%Y-%m-%d %H:%M:%S')
 
-WEBHOOK_URL="URL WEBHOOK"
+
+### Exemplo de funcionamento:
+
+```bash
+#!/bin/bash                                                                                              
+                                                                                                         
+# Configurações                                                                                          
+SITE="http://localhost"                                                                                  
+LOG="/var/log/monitoramento.log"                                                                         
+STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$SITE")                                                 
+DATA=$(date '+%Y-%m-%d %H:%M:%S')                                                                        
+
+# Webhook do Discord
+WEBHOOK_URL="https://discordapp.com/api/webhooks/1388942660772823180/Bt_aR_3SJYQUdtctl_q1xvE5IASTsIfR1DDIxy8btyLhPkk7Z1PktCNvl8uwos6XRqFe"
 
 if [ "$STATUS" -eq 200 ]; then
     echo "$DATA - OK - $SITE está online" >> "$LOG"
 else
     echo "$DATA - ERRO - $SITE está offline (status: $STATUS)" >> "$LOG"
     curl -H "Content-Type: application/json" -X POST -d "{
-      \"content\": \"🚨 *Alerta:* O site $SITE está fora do ar!\\nStatus: $STATUS\\nData: $DATA\"
+      \"content\": \"🚨 *Alerta:* O site está fora do ar!\nStatus: offline\"
     }" "$WEBHOOK_URL"
 fi
+
 ```
 
 ### Descrição do funcionamento do script:
-- Define o site a ser monitorado
+#### Define o site a ser monitorado
   
- O endereço do site que será verificado é armazenado em uma variável. No exemplo, é o endereço http://localhost, que representa o próprio servidor onde o script está rodando.
+   - O endereço do site que será verificado é armazenado em uma variável. No exemplo, é o endereço http://localhost, que representa o próprio servidor onde o script está rodando.
 
 
-- Define o caminho do arquivo de log
+#### Define o caminho do arquivo de log
 
-As informações de funcionamento do script (se o site está online ou offline) serão registradas em um arquivo localizado em /var/log/monitoramento.log.
-
-
-- Verifica se o site está respondendo corretamente
-
-O script faz uma requisição ao site e verifica apenas o código de resposta, que é aquele número padrão de HTTP (como 200 para OK, 404 para não encontrado, etc.). Esse código é armazenado em uma variável.
+   - As informações de funcionamento do script (se o site está online ou offline) serão registradas em um arquivo localizado em /var/log/monitoramento.log.
 
 
-- Pega a data e hora atual
+#### Verifica se o site está respondendo corretamente
 
-O script obtém a data e o horário em que a verificação está sendo feita. Isso será usado tanto no log quanto na mensagem de alerta.
-
-
-- Define o endereço do webhook do Discord
-
-Um link de webhook do Discord é usado para enviar alertas. Essa URL é configurada pelo usuário.
+   - O script faz uma requisição ao site e verifica apenas o código de resposta, que é aquele número padrão de HTTP (como 200 para OK, 404 para não encontrado, etc.). Esse código é armazenado em uma variável.
 
 
-- Verifica se o site está online ou não
+#### Pega a data e hora atual
 
-O script compara o código de status da requisição. Se for 200 (OK), ele registra que o site está online. Caso contrário, registra um erro no log e envia uma mensagem para o Discord informando que o site está fora do ar.
+   - O script obtém a data e o horário em que a verificação está sendo feita. Isso será usado tanto no log quanto na mensagem de alerta.
+
+
+#### Define o endereço do webhook do Discord
+
+   - Um link de webhook do Discord é usado para enviar alertas. Essa URL é configurada pelo usuário.
+
+
+#### Verifica se o site está online ou não
+
+   - O script compara o código de status da requisição. Se for 200 (OK), ele registra que o site está online. Caso contrário, registra um erro no log e envia uma mensagem para o Discord informando que o site está fora do ar.
 
 
 ---
@@ -248,10 +258,12 @@ sudo systemctl stop nginx
 
 As notificações são enviadas para o canal Discord via Webhook com o seguinte formato:
 
-```
-🚨 *Alerta:* O site está fora do ar!
-Data: 2025-06-27 14:35:00
-```
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f0a95645-ade3-44a2-b102-e2014e49f76a" alt="image" width="500">
+</p>
+
+
 ---
 
 ## ✨ Autor
