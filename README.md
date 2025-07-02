@@ -1,7 +1,26 @@
 
 # Projeto DevSecOps 2025 – Servidor Web com Monitoramento
 
-Este projeto configura uma infraestrutura simples baseada em uma instância EC2 rodando Linux (Ubuntu), com:
+Este projeto se baseia na configuração de uma infraestrutura simples baseada em uma instância EC2 rodando Linux (Ubuntu), com:
+
+1. Criar uma VPC na AWS com:
+   
+a. 2 sub-redes públicas (para acesso externo).
+b. 2 sub-redes privadas (para futuras expansões).
+c. Uma Internet Gateway conectada às sub-redes públicas.
+
+
+2. Criar uma instância EC2 na AWS:
+   
+a. Escolher uma AMI baseada em Linux (Ubuntu/Debian/Amazon 
+Linux).
+b. Instalar na sub-rede pública criada anteriormente.
+c. Associar um Security Group que permita tráfego nas seguintes portas:
+HTTP - `(porta 80)`
+SSH  - `(porta 22)`
+
+
+3. Acessar a instância via SSH para realizar configurações futuras.
 
 - Servidor web (Nginx)
 - Site HTML interativo (imagem + som)
@@ -10,7 +29,7 @@ Este projeto configura uma infraestrutura simples baseada em uma instância EC2 
 
 ---
 
-## 🛠️ a. Como configurar o ambiente
+## 🛠️ A. Configurando o Ambiente
 
 ### 1. Criar uma VPC personalizada na AWS
 
@@ -33,7 +52,7 @@ Este projeto configura uma infraestrutura simples baseada em uma instância EC2 
 
 ---
 
-## 🌐 b. Como instalar e configurar o servidor web
+## 🌐 B. Configurando o Servidor Web
 
 ### 1. Conectar na EC2 via SSH
 
@@ -66,7 +85,7 @@ Acesse em `http://<ip-público>` para visualizar o site.
 
 ---
 
-## 📟 c. Como funciona o script de monitoramento
+## 📟 C. Script de Monitoramento
 
 ### Script: `/usr/local/bin/monitoramento.sh`
 
@@ -100,7 +119,7 @@ fi
 
 ---
 
-## ⏱️ d. Como testar e validar a solução
+## ⏱️ D. Como Testar
 
 ### 1. Testar o script manualmente:
 
@@ -138,7 +157,7 @@ sudo systemctl stop nginx
 
 ---
 
-## 📦 Estrutura de diretórios
+## 📦 Estrutura de Diretórios
 
 ```
 /var/www/html/
@@ -173,7 +192,7 @@ Data: 2025-06-27 14:35:00
 - Nginx
 - Bash
 - `cron`
-- Webhook do Discord configurado
+- Webhook do Discord Configurado
 
 ---
 
