@@ -155,7 +155,7 @@ STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$SITE")
 DATA=$(date '+%Y-%m-%d %H:%M:%S')                                                                        
 
 # Webhook do Discord
-WEBHOOK_URL="https://discordapp.com/api/webhooks/1388942660772823180/Bt_aR_3SJYQUdtctl_q1xvE5IASTsIfR1DDIxy8btyLhPkk7Z1PktCNvl8uwos6XRqFe"
+WEBHOOK_URL="seuwebhook"
 
 if [ "$STATUS" -eq 200 ]; then
     echo "$DATA - OK - $SITE está online" >> "$LOG"
