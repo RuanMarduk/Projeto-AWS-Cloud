@@ -201,7 +201,7 @@ fi
 
 ---
 
-# ⏱️ D. Como Testar
+#  D. Como Testar
 
 ### 1. Testar o script manualmente:
 
