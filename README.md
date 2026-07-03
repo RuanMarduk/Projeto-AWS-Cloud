@@ -32,7 +32,7 @@ Este projeto se baseia na configuração de uma infraestrutura simples baseada e
 
 ---
 
-# 📌 Requisitos
+#  Requisitos
 
 - AWS EC2 (Ubuntu)
 - Nginx
@@ -41,7 +41,7 @@ Este projeto se baseia na configuração de uma infraestrutura simples baseada e
 - Webhook do Discord Configurado
 ---
 
-# 🛠️ A. Configurando o Ambiente
+#  A. Configurando o Ambiente
 
 ## 1. Criar uma VPC personalizada na AWS
 
@@ -81,7 +81,7 @@ Este projeto se baseia na configuração de uma infraestrutura simples baseada e
 
 ---
 
-# 🌐 B. Configurando o Servidor Web
+#  B. Configurando o Servidor Web
 
 ### 1. Conectar na EC2 via SSH
    - É importante ressaltar que será gerado um arquivo ".pem", este será sua chave para se conectar na EC2 via terminal
@@ -115,7 +115,7 @@ Acesse em `http://<ip-público>` para visualizar o site.
 
 ---
 
-# 📟 C. Script de Monitoramento
+#  C. Script de Monitoramento
 
 ### Script: `/usr/local/bin/monitoramento.sh`
 
@@ -162,7 +162,7 @@ if [ "$STATUS" -eq 200 ]; then
 else
     echo "$DATA - ERRO - $SITE está offline (status: $STATUS)" >> "$LOG"
     curl -H "Content-Type: application/json" -X POST -d "{
-      \"content\": \"🚨 *Alerta:* O site está fora do ar!\nStatus: offline\"
+      \"content\": \" *Alerta:* O site está fora do ar!\nStatus: offline\"
     }" "$WEBHOOK_URL"
 fi
 
@@ -239,7 +239,7 @@ sudo systemctl stop nginx
 
 ---
 
-# 📦 Estrutura de Diretórios
+#  Estrutura de Diretórios
 
 ```
 /var/www/html/
@@ -254,7 +254,7 @@ sudo systemctl stop nginx
 
 ---
 
-# 📬 Notificações
+#  Notificações
 
 As notificações são enviadas para o canal Discord via Webhook com o seguinte formato:
 
@@ -266,7 +266,7 @@ As notificações são enviadas para o canal Discord via Webhook com o seguinte 
 
 ---
 
-## ✨ Autor
+##  Autor
 
 Ruan Marra — 2025  
 Projeto acadêmico DevSecOps com foco em práticas de automação, infraestrutura e monitoramento.
